@@ -61,8 +61,8 @@
     <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
         <label for="name">Name:</label>
         <input type="text" name="name" id="name" required><br>
-        <label for="age">Age:</label>
-        <input type="number" name="age" id="age" required><br>
+        <label for="height">How tall (in cm):</label>
+        <input type="number" name="height" id="height" step="0.1" required><br>
         <label for="birthday">Birthday:</label>
         <input type="date" name="birthday" id="birthday" required><br>
         <button type="submit" name="insert">Insert Data</button>
@@ -90,8 +90,8 @@ if ($conn->connect_error) {
 }
 
 // Function to insert data into the database
-function insertData($conn, $name, $age, $birthday) {
-    $sql = "INSERT INTO people (name, age, birthday) VALUES ('$name', $age, '$birthday')";
+function insertData($conn, $name, $height, $birthday) {
+    $sql = "INSERT INTO people (name, height, birthday) VALUES ('$name', $height, '$birthday')";
     if ($conn->query($sql) === TRUE) {
         echo "New record created successfully<br>";
     } else {
@@ -101,12 +101,12 @@ function insertData($conn, $name, $age, $birthday) {
 
 // Function to read data from the database based on the search query
 function searchData($conn, $search) {
-    $sql = "SELECT id, name, age, birthday FROM people WHERE name LIKE '%$search%'";
+    $sql = "SELECT id, name, height, birthday FROM people WHERE name LIKE '%$search%'";
     $result = $conn->query($sql);
 
     if ($result->num_rows > 0) {
         while($row = $result->fetch_assoc()) {
-            echo "id: " . $row["id"]. " - Name: " . $row["name"]. " - Age: " . $row["age"] . " - Birthday: " . $row["birthday"] . "<br>";
+            echo "id: " . $row["id"]. " - Name: " . $row["name"]. " - Height: " . $row["height"] . "cm - Birthday: " . $row["birthday"] . "<br>";
         }
     } else {
         echo "0 results";
