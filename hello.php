@@ -77,9 +77,9 @@
 <?php
 // Database configuration
 $servername = "localhost";
-$username = "your_username";
-$password = "your_password";
-$dbname = "your_database_name";
+$username = "aal";
+$password = "063c2582b4cb827726d9018259156dd239a0deb06fce19cf757dd7ba0a898bcb";
+$dbname = "alandb";
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
