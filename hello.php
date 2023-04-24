@@ -73,6 +73,10 @@
         <input type="text" name="search" id="search" required>
         <button type="submit" name="display">Search</button>
     </form>
+    <br>
+    <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
+        <button type="submit" name="test_connection">Test Database Connection</button>
+    </form>
 
 <?php
 // Database configuration
