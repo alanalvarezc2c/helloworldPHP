@@ -120,7 +120,7 @@ function searchData($conn, $search) {
 
     if ($result->num_rows > 0) {
         while($row = $result->fetch_assoc()) {
-            echo "id: " . $row["id"]. " - Name: " . $row["name"]. " - Height: " . $row["height"] . "cm - Birthday: " . $row["birthday"] . "<br>";
+            echo "<div class='centered-container'><div class='centered-text'>id: " . $row["id"]. " - Name: " . $row["name"]. " - Height: " . $row["height"] . "</div></div><br>" . "cm - Birthday: " . $row["birthday"] . "<br>";
         }
     } else {
         echo "<div class='centered-container'><div class='centered-text'>0 results</div></div>";
