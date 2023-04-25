@@ -121,11 +121,11 @@ function searchData($conn, $search) {
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (isset($_POST['insert'])) {
         $name = $_POST['name'];
-        $age = $_POST['age'];
+        $height = $_POST['height'];
         $birthday = $_POST['birthday'];
-        if (!empty($name) && !empty($age) && !empty($birthday)) {
+        if (!empty($name) && !empty($height) && !empty($birthday)) {
             // Test inserting data into the database
-            insertData($conn, $name, $age, $birthday);
+            insertData($conn, $name, $height, $birthday);
         } else {
             echo "Please fill in all fields.<br>";
         }
