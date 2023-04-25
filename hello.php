@@ -98,11 +98,6 @@ $dbname = "alandb";
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
 
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
-
 // Function to insert data into the database
 function insertData($conn, $name, $height, $birthday) {
     $sql = "INSERT INTO people (name, height, birthday) VALUES ('$name', $height, '$birthday')";
@@ -111,6 +106,17 @@ function insertData($conn, $name, $height, $birthday) {
     } else {
         echo "<div class='centered-container'><div class='centered-text'>Error: </div></div>" . $sql . "<br>" . $conn->error;
     }
+}
+
+// Function to test connection to database
+function testDbConnection($servername, $username, $password, $dbname) {
+    $test_conn = new mysqli($servername, $username, $password, $dbname);
+    if ($test_conn->connect_error) {
+        echo "<div class='centered-container'><div class='centered-text'>Connection failed: " . $test_conn->connect_error . "</div></div>";
+    } else {
+        echo "<div class='centered-container'><div class='centered-text'>Connection to database was successful!</div></div>";
+    }
+    $test_conn->close();
 }
 
 // Function to read data from the database based on the search query
@@ -147,6 +153,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         } else {
             echo "<div class='centered-container'><div class='centered-text'>Please enter a name to search.<br></div></div>";
         }
+    }
+    
+    // Test DB connection
+    if (isset($_POST['test_connection'])) {
+        testDbConnection($servername, $username, $password, $dbname);
     }
 }
 
