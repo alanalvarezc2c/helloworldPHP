@@ -54,9 +54,15 @@
         button:hover {
             background-color: #4b4b4b;
         }
+        
+        .centered-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        
         .centered-text {
             text-align: center;
-            margin-bottom: 20px;
         }
     </style>
 </head>
@@ -101,9 +107,9 @@ if ($conn->connect_error) {
 function insertData($conn, $name, $height, $birthday) {
     $sql = "INSERT INTO people (name, height, birthday) VALUES ('$name', $height, '$birthday')";
     if ($conn->query($sql) === TRUE) {
-        echo "<div class='centered-text'>New record created successfully<br></div>";
+        echo "<div class='centered-container'><div class='centered-text'>New record created successfully<br></div></div>";
     } else {
-        echo "<div class='centered-text'>Error: </div>" . $sql . "<br>" . $conn->error;
+        echo "<div class='centered-container'><div class='centered-text'>Error: </div></div>" . $sql . "<br>" . $conn->error;
     }
 }
 
@@ -117,7 +123,7 @@ function searchData($conn, $search) {
             echo "id: " . $row["id"]. " - Name: " . $row["name"]. " - Height: " . $row["height"] . "cm - Birthday: " . $row["birthday"] . "<br>";
         }
     } else {
-        echo "<div class='centered-text'>0 results</div>";
+        echo "<div class='centered-container'><div class='centered-text'>0 results</div></div>";
     }
 }
 
@@ -131,7 +137,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             // Test inserting data into the database
             insertData($conn, $name, $height, $birthday);
         } else {
-            echo "<div class='centered-text'>Please fill in all fields.<br></div>";
+            echo "<div class='centered-container'><div class='centered-text'>Please fill in all fields.<br></div></div>";
         }
     } elseif (isset($_POST['display'])) {
         $search = $_POST['search'];
@@ -139,7 +145,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             // Test searching data from the database
             searchData($conn, $search);
         } else {
-            echo "<div class='centered-text'>Please enter a name to search.<br></div>";
+            echo "<div class='centered-container'><div class='centered-text'>Please enter a name to search.<br></div></div>";
         }
     }
 }
