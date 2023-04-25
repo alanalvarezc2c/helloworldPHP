@@ -54,6 +54,10 @@
         button:hover {
             background-color: #4b4b4b;
         }
+        .centered-text {
+            text-align: center;
+            margin-bottom: 20px;
+        }
     </style>
 </head>
 <body>
@@ -97,9 +101,9 @@ if ($conn->connect_error) {
 function insertData($conn, $name, $height, $birthday) {
     $sql = "INSERT INTO people (name, height, birthday) VALUES ('$name', $height, '$birthday')";
     if ($conn->query($sql) === TRUE) {
-        echo "New record created successfully<br>";
+        echo "<div class='centered-text'>New record created successfully<br></div>";
     } else {
-        echo "Error: " . $sql . "<br>" . $conn->error;
+        echo "<div class='centered-text'>Error: </div>" . $sql . "<br>" . $conn->error;
     }
 }
 
@@ -113,7 +117,7 @@ function searchData($conn, $search) {
             echo "id: " . $row["id"]. " - Name: " . $row["name"]. " - Height: " . $row["height"] . "cm - Birthday: " . $row["birthday"] . "<br>";
         }
     } else {
-        echo "0 results";
+        echo "<div class='centered-text'>0 results</div>";
     }
 }
 
@@ -127,7 +131,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             // Test inserting data into the database
             insertData($conn, $name, $height, $birthday);
         } else {
-            echo "Please fill in all fields.<br>";
+            echo "<div class='centered-text'>Please fill in all fields.<br></div>";
         }
     } elseif (isset($_POST['display'])) {
         $search = $_POST['search'];
@@ -135,7 +139,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             // Test searching data from the database
             searchData($conn, $search);
         } else {
-            echo "Please enter a name to search.<br>";
+            echo "<div class='centered-text'>Please enter a name to search.<br></div>";
         }
     }
 }
