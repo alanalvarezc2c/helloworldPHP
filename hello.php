@@ -157,6 +157,7 @@
     // Function to read all data from the table people in the database
     function getAllData($conn)
     {
+        global $conn;
         $sql = "SELECT id, name, height, birthday FROM people";
         $result = $conn->query($sql);
 
@@ -222,6 +223,7 @@
         }
     }
 
+    // Second form submission handling block
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if (isset($_POST['retrieve_all'])) {
             $allData = getAllData($conn);
