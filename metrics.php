@@ -1,5 +1,5 @@
 <?php
-header('Content-Type: text/plain; charset=utf-8');
+header('Content-Type: text/plain; charset=utf-8');$totalRowsResult
 
 $servername = "localhost";
 $username = "aal";
@@ -12,11 +12,11 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-$sql = "SELECT COUNT(name) as total_rows FROM people";
-$result = $conn->query($sql);
+$qTotalRows = "SELECT COUNT(name) as total_rows FROM people";
+$totalRowsResult = $conn->query($qTotalRows);
 
-if ($result->num_rows > 0) {
-    $row = $result->fetch_assoc();
+if ($totalRowsResult->num_rows > 0) {
+    $row = $totalRowsResult->fetch_assoc();
     $total_rows = $row["total_rows"];
 } else {
     $total_rows = 0;
