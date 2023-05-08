@@ -200,10 +200,36 @@
             } else {
                 echo "<div class='centered-container'><div class='centered-text'>Please enter a name to search.<br></div></div>";
             }
-        } elseif (isset($_POST['retrieve_all'])) {
+        }
+
+        // Test DB connection
+        if (isset($_POST['test_connection'])) {
+            testDbConnection($servername, $username, $password, $dbname);
+        }
+    }
+
+    if (isset($_POST['retrieve_all'])) {
+        $allData = getAllData($conn);
+        foreach ($allData as $row) {
+            echo "<div class='centered-container'><div class='centered-text'>id: " . $row["id"] . " - Name: " . htmlspecialchars($row["name"]) . " - Height: " . $row["height"] . "cm - Birthday: " . $row["birthday"] . "</div></div><br>";
+        }
+    } elseif (isset($_POST['remove_data'])) {
+        $delete_name = $_POST['delete_name'];
+        if (!empty($delete_name)) {
+            removeDataByName($conn, $delete_name);
+        } else {
+            echo "<div class='centered-container'><div class='centered-text'>Please select a name to delete.<br></div></div>";
+        }
+    }
+
+    // Close the database connection
+    $conn->close();
+
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        if (isset($_POST['retrieve_all'])) {
             $allData = getAllData($conn);
             foreach ($allData as $row) {
-                echo "<div class='centered-container'><div class='centered-text'>id: " . $row["id"]. " - Name: " . htmlspecialchars($row["name"]). " - Height: " . $row["height"] . "cm - Birthday: " . $row["birthday"] . "</div></div><br>";
+                echo "<div class='centered-container'><div class='centered-text'>id: " . $row["id"] . " - Name: " . htmlspecialchars($row["name"]) . " - Height: " . $row["height"] . "cm - Birthday: " . $row["birthday"] . "</div></div><br>";
             }
         } elseif (isset($_POST['remove_data'])) {
             $delete_name = $_POST['delete_name'];
@@ -213,29 +239,7 @@
                 echo "<div class='centered-container'><div class='centered-text'>Please select a name to delete.<br></div></div>";
             }
         }
-        
-        // Test DB connection
-        if (isset($_POST['test_connection'])) {
-            testDbConnection($servername, $username, $password, $dbname);
-        }
     }
-
-    if (isset($_POST['retrieve_all'])) {
-    $allData = getAllData($conn);
-    foreach ($allData as $row) {
-        echo "<div class='centered-container'><div class='centered-text'>id: " . $row["id"]. " - Name: " . htmlspecialchars($row["name"]). " - Height: " . $row["height"] . "cm - Birthday: " . $row["birthday"] . "</div></div><br>";
-    }
-} elseif (isset($_POST['remove_data'])) {
-    $delete_name = $_POST['delete_name'];
-    if (!empty($delete_name)) {
-        removeDataByName($conn, $delete_name);
-    } else {
-        echo "<div class='centered-container'><div class='centered-text'>Please select a name to delete.<br></div></div>";
-    }
-}
-
-    // Close the database connection
-    $conn->close();
     ?>
 </body>
 
