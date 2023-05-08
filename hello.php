@@ -222,9 +222,6 @@
         }
     }
 
-    // Close the database connection
-    $conn->close();
-
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if (isset($_POST['retrieve_all'])) {
             $allData = getAllData($conn);
@@ -240,6 +237,9 @@
             }
         }
     }
+
+    // Close the database connection
+    $conn->close();
     ?>
 </body>
 
