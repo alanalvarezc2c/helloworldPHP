@@ -1,5 +1,5 @@
 <?php
-header('Content-Type: text/plain; charset=utf-8');$totalRowsResult
+header('Content-Type: text/plain; charset=utf-8');
 
 $servername = "localhost";
 $username = "aal";
