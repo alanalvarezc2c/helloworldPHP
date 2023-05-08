@@ -22,9 +22,23 @@ if ($totalRowsResult->num_rows > 0) {
     $total_rows = 0;
 }
 
+$qMaxHeight = "SELECT MAX(height) as max_height FROM people";
+$maxHeightResult = $conn->query($qMaxHeight);
+
+if ($maxHeightResult->num_rows > 0) {
+    $row = $maxHeightResult->fetch_assoc();
+    $max_height = $row["max_height"];
+} else {
+    $max_height = 0;
+}
+
 $conn->close();
 
 echo "# HELP total_rows_metric Total rows number of 'names'\n";
 echo "# TYPE total_rows_metric gauge\n";
 echo 'total_rows_metric{table="people", column="name"} ' . $total_rows . "\n";
+
+echo "# HELP max_height_metric Maximum height value of 'people'\n";
+echo "# TYPE max_height_metric gauge\n";
+echo 'max_height_metric{table="people", column="height"} ' . $max_height . "\n";
 ?>
